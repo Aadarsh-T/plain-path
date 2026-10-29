@@ -1,0 +1,65 @@
+:root {
+  color-scheme: light;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.2rem; --text-xl: 1.44rem; --text-2xl: 1.728rem; --text-3xl: 2.074rem;
+  --text-display-s: 1.44rem; --text-display: 1.728rem; --text-section: 1.2rem; --text-title: 1rem; --text-lead: 1rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  --color-paper: oklch(95.8% 0.024 90); --color-paper-2: oklch(92.6% 0.030 90); --color-paper-3: oklch(89% 0.034 90);
+  --color-ink: oklch(23% 0.050 152); --color-ink-2: oklch(33% 0.048 150); --color-muted: oklch(46% 0.034 142);
+  --color-rule: oklch(83% 0.024 112); --color-rule-2: oklch(68% 0.042 138);
+  --color-accent: oklch(46% 0.135 142); --color-accent-2: oklch(86% 0.075 128); --color-accent-ink: oklch(97% 0.015 95);
+  --color-focus: oklch(46% 0.135 142); --tint-moss: oklch(46% 0.135 142 / 0.11); --tint-clay: oklch(54% 0.140 46 / 0.10);
+  --font-display: Georgia, Cambria, "Times New Roman", ui-serif, serif; --font-body: Verdana, "Segoe UI", Arial, Helvetica, sans-serif;
+  --radius-card: 4px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.012em; --display-weight: 600;
+}
+/* Plain Path: app tokens and the reader's display modes (each block below is a declared theme block that app.js switches on body) */
+:root {
+  --container: 1180px; --gutter: 40px;
+  --text-section: 1.44rem; --text-title: 1.2rem; --text-display: 1.728rem;
+  --color-surface: oklch(98.6% 0.012 92); --color-accent-strong: oklch(39% 0.125 142);
+  --color-level-mid: oklch(91% 0.095 96); --color-level-hard: oklch(87% 0.075 42); --color-level-hard-line: oklch(47% 0.15 36);
+  --color-swap: oklch(90% 0.045 240); --color-speak: oklch(87% 0.15 100); --color-sent-now: oklch(91% 0.05 140);
+  --color-shadow: oklch(23% 0.05 152 / 0.14);
+  --font-display: Georgia, Cambria, "Times New Roman", ui-serif, serif;
+  --font-sans: Verdana, "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: "Courier New", Consolas, monospace;
+  --font-body: var(--font-sans);
+  --fs: 20px; --ls: 0.02em; --ws: 0.1em; --lh: 1.7;
+}
+body.f-serif { --font-body: var(--font-serif); }
+body.f-mono  { --font-body: var(--font-mono); }
+body[data-tint="white"] { --color-paper: oklch(99.4% 0.003 95); --color-paper-2: oklch(96.6% 0.008 95); --color-paper-3: oklch(93.5% 0.012 95); --color-surface: oklch(99.4% 0.003 95); }
+body[data-tint="blue"]  { --color-paper: oklch(95.6% 0.018 245); --color-paper-2: oklch(92.4% 0.026 245); --color-paper-3: oklch(89% 0.032 245); --color-surface: oklch(98.4% 0.008 245); }
+body[data-tint="green"] { --color-paper: oklch(95.6% 0.026 140); --color-paper-2: oklch(92.4% 0.034 140); --color-paper-3: oklch(89% 0.04 140); --color-surface: oklch(98.4% 0.012 140); }
+body[data-tint="peach"] { --color-paper: oklch(95.4% 0.026 55); --color-paper-2: oklch(92.2% 0.034 55); --color-paper-3: oklch(89% 0.04 55); --color-surface: oklch(98.4% 0.012 55); }
+body[data-tint="dark"]  {
+  color-scheme: dark;
+  --color-paper: oklch(18% 0.014 150); --color-paper-2: oklch(22% 0.016 150); --color-paper-3: oklch(26% 0.018 150); --color-surface: oklch(23% 0.016 150);
+  --color-ink: oklch(94% 0.014 95); --color-ink-2: oklch(89% 0.016 95); --color-muted: oklch(79% 0.022 130);
+  --color-rule: oklch(34% 0.016 140); --color-rule-2: oklch(56% 0.03 140);
+  --color-accent: oklch(79% 0.13 135); --color-accent-strong: oklch(85% 0.12 135); --color-accent-2: oklch(40% 0.07 135); --color-accent-ink: oklch(19% 0.03 150); --color-focus: oklch(82% 0.14 135);
+  --color-level-mid: oklch(37% 0.06 95); --color-level-hard: oklch(37% 0.07 40); --color-level-hard-line: oklch(76% 0.12 40);
+  --color-swap: oklch(35% 0.06 245); --color-speak: oklch(48% 0.1 95); --color-sent-now: oklch(31% 0.045 140);
+  --color-shadow: oklch(5% 0.01 150 / 0.5);
+}
+body.contrast {
+  --color-paper: #ffffff; --color-paper-2: #f2f2f2; --color-paper-3: #e6e6e6; --color-surface: #ffffff;
+  --color-ink: #000000; --color-ink-2: #000000; --color-muted: #000000; --color-rule: #000000; --color-rule-2: #000000;
+  --color-accent: #000000; --color-accent-strong: #000000; --color-accent-2: #000000; --color-accent-ink: #ffffff; --color-focus: #0000cc;
+  --color-level-mid: #ffff00; --color-level-hard: #ffb3b3; --color-level-hard-line: #000000;
+  --color-swap: #b3e0ff; --color-speak: #00ffff; --color-sent-now: #e6e6e6;
+}
+body.contrast[data-tint="dark"] {
+  --color-paper: #000000; --color-paper-2: #141414; --color-paper-3: #262626; --color-surface: #000000;
+  --color-ink: #ffffff; --color-ink-2: #ffffff; --color-muted: #ffffff; --color-rule: #ffffff; --color-rule-2: #ffffff;
+  --color-accent: #ffff00; --color-accent-strong: #ffff00; --color-accent-2: #ffff00; --color-accent-ink: #000000; --color-focus: #00ffff;
+  --color-level-mid: #3d3d00; --color-level-hard: #5c0000; --color-level-hard-line: #ffffff;
+  --color-swap: #00305c; --color-speak: #006b6b; --color-sent-now: #262626;
+}
+@media (max-width: 40rem) { :root { --gutter: 16px; } }

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plain Path</title>
 <meta name="description" content="Plain Path helps learners with dyslexia or who are new to English read dense textbook passages. Runs offline, no login.">
-<meta name="theme-color" content="#1f5f8b">
+<meta name="theme-color" content="#f6f0e0">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
@@ -13,17 +13,17 @@
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="top">
-  <div class="wrap top-row">
-    <div>
+  <div class="container top-row">
+    <div class="brand">
       <h1>Plain Path</h1>
       <p class="tag">Read hard textbook text one clear step at a time. Works offline. Nothing leaves your device.</p>
     </div>
-    <button id="settingsToggle" class="btn ghost" aria-expanded="false" aria-controls="settings">Display settings</button>
+    <button id="settingsToggle" class="btn ghost" type="button" aria-expanded="false" aria-controls="settings">Display settings</button>
   </div>
 </header>
 
 <section id="settings" class="settings" hidden aria-label="Display settings">
-  <div class="wrap settings-grid">
+  <div class="container settings-grid">
     <label>Text size <output id="fontSizeOut">20px</output>
       <input type="range" id="fontSize" min="16" max="34" step="1" value="20"></label>
     <label>Letter spacing <output id="letterOut">0.02em</output>
@@ -53,10 +53,11 @@
   </div>
 </section>
 
-<main id="main" class="wrap">
-  <section class="card" aria-labelledby="inputHead">
-    <h2 id="inputHead">1. Add a passage</h2>
-    <div class="row">
+<main id="main" class="container">
+  <section class="compose" aria-labelledby="inputHead">
+    <div class="compose-side">
+      <h2 id="inputHead">1. Add a passage</h2>
+      <div class="field">
       <label for="sample">Try a sample:</label>
       <select id="sample">
         <option value="">Choose a sample passage</option>
@@ -64,20 +65,25 @@
         <option value="water">Earth science: The water cycle</option>
         <option value="civics">Civics: How a bill becomes a law</option>
       </select>
+      </div>
     </div>
-    <label for="input" class="block">Or paste text from your textbook:</label>
-    <textarea id="input" rows="7" spellcheck="true" placeholder="Paste a paragraph here"></textarea>
-    <div class="row">
-      <button id="analyze" class="btn primary" type="button">Make it readable</button>
-      <button id="clear" class="btn ghost" type="button">Clear</button>
-      <span id="charCount" class="muted" aria-live="polite"></span>
+    <div class="compose-main">
+      <label for="input" class="block">Or paste text from your textbook:</label>
+      <textarea id="input" rows="7" spellcheck="true" placeholder="Paste a paragraph here"></textarea>
+      <div class="row">
+        <button id="analyze" class="btn primary" type="button">Make it readable</button>
+        <button id="clear" class="btn ghost" type="button">Clear</button>
+        <span id="charCount" class="muted" aria-live="polite"></span>
+      </div>
     </div>
   </section>
 
-  <section id="results" class="card" hidden aria-labelledby="resHead">
+  <section id="results" class="results" hidden aria-labelledby="resHead">
     <h2 id="resHead">2. Read it your way</h2>
+    <div class="results-grid">
     <div id="summary" class="summary" aria-live="polite"></div>
 
+    <div class="results-main">
     <div class="tabs" role="tablist" aria-label="Reading views">
       <button role="tab" id="tab-read" aria-controls="panel-read" aria-selected="true">Full text</button>
       <button role="tab" id="tab-focus" aria-controls="panel-focus" aria-selected="false" tabindex="-1">Focus reader</button>
@@ -121,9 +127,11 @@
       <p class="muted">Hardest sentences first. These are suggestions for a teacher, tutor or you.</p>
       <ol id="hints" class="hints"></ol>
     </div>
+    </div>
+    </div>
   </section>
 
-  <section class="card about" aria-labelledby="aboutHead">
+  <section class="about" aria-labelledby="aboutHead">
     <h2 id="aboutHead">How the score works</h2>
     <p>Each sentence gets a Flesch-Kincaid grade level: a number based on how long the sentence is and how many syllables its words have. Grade 6 is about the level of a middle-school reader. Shorter sentences and shorter words lower the grade. It is a rough guide, not a judgment of the reader.</p>
   </section>
@@ -139,7 +147,7 @@
 </div>
 <div id="live" class="sr-only" aria-live="polite"></div>
 
-<footer class="wrap foot">
+<footer class="container foot">
   <p>Plain Path is free and open source (MIT). No accounts, no tracking, no network calls. Built for AccessED Hacks 2026 with AI coding assistance from Claude (Anthropic).</p>
 </footer>
 <script src="glossary.js"></script>

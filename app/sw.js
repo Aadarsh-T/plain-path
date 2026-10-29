@@ -1,6 +1,6 @@
 // Plain Path service worker: cache the app shell so it works offline.
-const CACHE = 'plain-path-v1';
-const FILES = ['./', './index.html', './styles.css', './app.js', './glossary.js', './icon.svg', './manifest.webmanifest'];
+const CACHE = 'plain-path-v2';
+const FILES = ['./', './index.html', './styles.css', './tokens.css', './base.css', './app.js', './glossary.js', './icon.svg', './manifest.webmanifest'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });

@@ -1,0 +1,11 @@
+{
+  "name": "Plain Path",
+  "short_name": "Plain Path",
+  "description": "Read dense textbook text one clear step at a time.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf6e9",
+  "theme_color": "#1f5f8b",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

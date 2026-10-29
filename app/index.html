@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plain Path</title>
+<meta name="description" content="Plain Path helps learners with dyslexia or who are new to English read dense textbook passages. Runs offline, no login.">
+<meta name="theme-color" content="#1f5f8b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <div>
+      <h1>Plain Path</h1>
+      <p class="tag">Read hard textbook text one clear step at a time. Works offline. Nothing leaves your device.</p>
+    </div>
+    <button id="settingsToggle" class="btn ghost" aria-expanded="false" aria-controls="settings">Display settings</button>
+  </div>
+</header>
+
+<section id="settings" class="settings" hidden aria-label="Display settings">
+  <div class="wrap settings-grid">
+    <label>Text size <output id="fontSizeOut">20px</output>
+      <input type="range" id="fontSize" min="16" max="34" step="1" value="20"></label>
+    <label>Letter spacing <output id="letterOut">0.02em</output>
+      <input type="range" id="letter" min="0" max="0.2" step="0.01" value="0.02"></label>
+    <label>Word spacing <output id="wordOut">0.1em</output>
+      <input type="range" id="wordSp" min="0" max="0.6" step="0.05" value="0.1"></label>
+    <label>Line spacing <output id="lineOut">1.7</output>
+      <input type="range" id="line" min="1.3" max="2.6" step="0.1" value="1.7"></label>
+    <label>Font
+      <select id="font">
+        <option value="sans">Clear sans (Verdana / Arial)</option>
+        <option value="serif">Serif (Georgia)</option>
+        <option value="mono">Monospace (even letter widths)</option>
+      </select></label>
+    <label>Background tint
+      <select id="tint">
+        <option value="cream">Cream</option>
+        <option value="white">White</option>
+        <option value="blue">Soft blue</option>
+        <option value="green">Soft green</option>
+        <option value="peach">Peach</option>
+        <option value="dark">Dark</option>
+      </select></label>
+    <label class="check"><input type="checkbox" id="contrast"> High contrast</label>
+    <label class="check"><input type="checkbox" id="ruler"> Reading ruler (dim other sentences)</label>
+    <button id="resetSettings" class="btn ghost" type="button">Reset display</button>
+  </div>
+</section>
+
+<main id="main" class="wrap">
+  <section class="card" aria-labelledby="inputHead">
+    <h2 id="inputHead">1. Add a passage</h2>
+    <div class="row">
+      <label for="sample">Try a sample:</label>
+      <select id="sample">
+        <option value="">Choose a sample passage</option>
+        <option value="photo">Science: Photosynthesis</option>
+        <option value="water">Earth science: The water cycle</option>
+        <option value="civics">Civics: How a bill becomes a law</option>
+      </select>
+    </div>
+    <label for="input" class="block">Or paste text from your textbook:</label>
+    <textarea id="input" rows="7" spellcheck="true" placeholder="Paste a paragraph here"></textarea>
+    <div class="row">
+      <button id="analyze" class="btn primary" type="button">Make it readable</button>
+      <button id="clear" class="btn ghost" type="button">Clear</button>
+      <span id="charCount" class="muted" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section id="results" class="card" hidden aria-labelledby="resHead">
+    <h2 id="resHead">2. Read it your way</h2>
+    <div id="summary" class="summary" aria-live="polite"></div>
+
+    <div class="tabs" role="tablist" aria-label="Reading views">
+      <button role="tab" id="tab-read" aria-controls="panel-read" aria-selected="true">Full text</button>
+      <button role="tab" id="tab-focus" aria-controls="panel-focus" aria-selected="false" tabindex="-1">Focus reader</button>
+      <button role="tab" id="tab-plain" aria-controls="panel-plain" aria-selected="false" tabindex="-1">Plainer version</button>
+      <button role="tab" id="tab-hints" aria-controls="panel-hints" aria-selected="false" tabindex="-1">Rewrite hints</button>
+    </div>
+
+    <div class="speech" role="group" aria-label="Read aloud">
+      <button id="play" class="btn primary" type="button">Read aloud</button>
+      <button id="stop" class="btn ghost" type="button" disabled>Stop</button>
+      <label>Speed <output id="rateOut">0.9x</output>
+        <input type="range" id="rate" min="0.5" max="1.5" step="0.1" value="0.9"></label>
+      <span id="speechNote" class="muted"></span>
+    </div>
+
+    <div role="tabpanel" id="panel-read" aria-labelledby="tab-read" tabindex="0">
+      <p class="legend"><span class="sw easy"></span> easier <span class="sw mid"></span> harder <span class="sw hard"></span> hardest. <span class="gl-sample">Underlined</span> words: select to see a plain meaning.</p>
+      <div id="reader" class="reader"></div>
+    </div>
+
+    <div role="tabpanel" id="panel-focus" aria-labelledby="tab-focus" tabindex="0" hidden>
+      <p class="muted">One sentence at a time. Use the buttons or the Left and Right arrow keys.</p>
+      <div class="focus-box">
+        <p id="focusMeta" class="focus-meta" aria-live="polite"></p>
+        <div id="focusSentence" class="reader focus-sentence"></div>
+        <div id="focusHint" class="focus-hint"></div>
+      </div>
+      <div class="row">
+        <button id="prev" class="btn ghost" type="button">Previous sentence</button>
+        <button id="next" class="btn primary" type="button">Next sentence</button>
+        <button id="sayOne" class="btn ghost" type="button">Read this sentence</button>
+      </div>
+    </div>
+
+    <div role="tabpanel" id="panel-plain" aria-labelledby="tab-plain" tabindex="0" hidden>
+      <p class="muted">An automatic, rule-based draft: long sentences split and some hard words swapped for simple ones (shown <mark class="swap">like this</mark>). It can be wrong, so check it against the original.</p>
+      <div id="plain" class="reader"></div>
+    </div>
+
+    <div role="tabpanel" id="panel-hints" aria-labelledby="tab-hints" tabindex="0" hidden>
+      <p class="muted">Hardest sentences first. These are suggestions for a teacher, tutor or you.</p>
+      <ol id="hints" class="hints"></ol>
+    </div>
+  </section>
+
+  <section class="card about" aria-labelledby="aboutHead">
+    <h2 id="aboutHead">How the score works</h2>
+    <p>Each sentence gets a Flesch-Kincaid grade level: a number based on how long the sentence is and how many syllables its words have. Grade 6 is about the level of a middle-school reader. Shorter sentences and shorter words lower the grade. It is a rough guide, not a judgment of the reader.</p>
+  </section>
+</main>
+
+<div id="pop" class="pop" role="dialog" aria-modal="false" aria-labelledby="popWord" hidden>
+  <p class="pop-word" id="popWord"></p>
+  <p class="pop-def" id="popDef"></p>
+  <div class="row">
+    <button id="popSay" class="btn ghost small" type="button">Hear it</button>
+    <button id="popClose" class="btn ghost small" type="button">Close</button>
+  </div>
+</div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+
+<footer class="wrap foot">
+  <p>Plain Path is free and open source (MIT). No accounts, no tracking, no network calls. Built for AccessED Hacks 2026 with AI coding assistance from Claude (Anthropic).</p>
+</footer>
+<script src="glossary.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
